@@ -1,0 +1,34 @@
+# Workflow definition (ag.workflow.v2). Edit here or in the workflow editor.
+schema: ag.workflow.v2
+id: coordinate
+name: Coordinate
+intent: |
+  One look at the queue and the execution nodes: decide
+  which queued work starts where, what waits and until when, what moves to
+  another node, and what the working agents should know; apply it with
+  wfe coordinate, and end. WFE opens a run of this workflow whenever a job
+  awaits a decision, a deferral's time came or someone asked for another
+  look; its request says which. Nothing starts by itself.
+documentation:
+  policy: manual
+execution:
+  agent: coordination-agent
+  profile: sonnet
+  lane: coordination
+  guides: [agent/warden.md, agent/coordinate.md]
+intake:
+  zulip: ""
+repositories:
+  root: {path: ., access: editable}
+nodes:
+  coordinate:
+    type: do
+    name: Look and decide
+    description: |
+      Take the pending events (wfe coordinate events --take), read the view
+      (wfe coordinate view), look deeper where the view is not enough, then
+      record what starts, waits, moves or is noted (wfe coordinate
+      start|defer|assign|note). Complete this node with a short outcome: each
+      decision and its reason in a line, what waits and until when, what
+      could not be told.
+edges: []

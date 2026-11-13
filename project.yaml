@@ -1,0 +1,10 @@
+# Project definition (ag.project.v2). Repositories come from .gitmodules.
+
+schema: ag.project.v2
+id: warden
+name: warden
+devdocs: directory
+intent: "System operations of the agdev area: recovery runs that Observer requests when a workflow run is interrupted or stops, and execution coordination — which queued work starts where and when."
+goals:
+  - An interrupted run is investigated and continued, repaired or handed to a person, with the decision recorded
+  - Queued work is started, placed, deferred or noted by an agent's recorded judgment, concurrently on a node when that looks useful, and revised from what is observed
